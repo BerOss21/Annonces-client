@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Categories from "../views/Categories.vue";
 import Search from "../views/Search.vue";
+import Show from "../views/Show.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
@@ -35,6 +36,11 @@ const routes = [
     path: "/search",
     name: "Search",
     component: Search
+  },
+  {
+    path: "/single-annoucements/:id",
+    name: "Show",
+    component: Show
   },
   {
     path: "/dashboard",
