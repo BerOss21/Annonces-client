@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Categories from "../views/Categories.vue";
 import Search from "../views/Search.vue";
 import Show from "../views/Show.vue";
+import Chat from "../views/Chat.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
@@ -41,6 +42,11 @@ const routes = [
     path: "/single-annoucements/:id",
     name: "Show",
     component: Show
+  },
+  {
+    path: "/conversation/:id",
+    name: "Chat",
+    component: Chat
   },
   {
     path: "/dashboard",

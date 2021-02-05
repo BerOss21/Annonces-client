@@ -9,7 +9,7 @@
                 </h5>
                 <p class="card-text">{{annoucement.user?annoucement.user.email:''}}</p>
                 <p class="card-text">Mobile : </p>
-                <a href="#" class="btn btn-primary btn-block">Chat</a>
+                <router-link :to="{name:'Chat'}" class="btn btn-primary btn-block">Chat</router-link>
             </div>
         </div>
     </div>
