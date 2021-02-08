@@ -4,7 +4,11 @@ module.exports = {
             "/api": {
               target:'http://localhost:8000',
               secure: false
-             }  
+             } ,
+             "/broadcasting" :{
+                target:'http://localhost:8000',
+                 secure: false 
+             }
         },
     }
 }

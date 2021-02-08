@@ -46,7 +46,15 @@ const routes = [
   {
     path: "/conversation/:id",
     name: "Chat",
-    component: Chat
+    component: Chat,
+    beforeEnter: (to, from, next) => {
+      if(store.getters.user){
+        next();
+      }
+      else{
+        next({name:"Login"});
+      }
+    },
   },
   {
     path: "/dashboard",

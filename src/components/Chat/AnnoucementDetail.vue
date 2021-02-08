@@ -27,7 +27,6 @@
     import {
         mapState,
         mapActions,
-        mapMutations
     } from "vuex";
     export default {
         name: "AnnoucementDetail",
@@ -37,9 +36,6 @@
         methods: {
             ...mapActions({
                 getSingle: "getSingle"
-            }),
-            ...mapMutations({
-                clearAnnoucement: "clearAnnoucement"
             })
         },
         mounted() {
