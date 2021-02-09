@@ -18,16 +18,16 @@
                         <div class="col-5 mb-3"
                             :class="message.from.id==user.id?'ml-auto alert alert-success':'alert alert-secondary'"
                             v-for="(message,index) in messages" :key="index">
-                            <h5 class="card-title">{{message.from.name}}</h5>
+                            <strong class="card-title">{{message.from.name==user.name?"Vous":message.from.name}}</strong>
                             <p class="card-text">{{message.content}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer text-muted">
-                    <form @submit.prevent="SentMessage" ref="form">
+                    <form v-if="receiver && annoucement.user_id==user.id || annoucement.user_id!=user.id" @submit.prevent="SentMessage" ref="form">
                         <div class="form-group mb-3">
                             <textarea class="form-control" placeholder="Ecrire votre message ici"
-                                v-model="content"></textarea>
+                                v-model="content" @focus="makeAsRead"></textarea>
                             <input type="submit" class="btn btn-danger btn-block form-control p-1 mt-3" value="envoyer">
                         </div>
                     </form>
@@ -39,7 +39,6 @@
                         </li>
                     </ul>
                 </div>
-
             </div>
         </div>
     </div>
@@ -75,31 +74,9 @@
                     return this.annoucement.user_id == this.user.id ? "" : this.allMessages;
                 }
             },
-            /*echo(){
-                 return new Echo({
-                            broadcaster: 'pusher',
-                            key: "MyAppId",
-                            cluster: "mt1",
-                            forceTLS: false,
-                            wsHost: window.location.hostname,
-                            wsPort: 6001,
-                            wssHost: window.location.hostname,
-                            wssPort: 6001,
-                            disableStats: true,
-                            enabledTransports: ['ws', 'wss'],
-                            auth: {
-                                headers: {
-                                    Authorization: `Bearer ${this.user.token}`,
-                                    Accept: 'application/json',
-                                },
-                            },
-                        })
-            }*/
         },
         methods: {
-            ...mapActions({
-                getSingle: "getSingle"
-            }),
+            ...mapActions(["getSingle","getNotifications"]),
             SentMessage() {
                 axios.post("/api/messages", {
                     to: this.annoucement.user_id == this.user.id ? this.receiver : this.annoucement.user_id,
@@ -111,7 +88,7 @@
                     }
                 }).then(res => {
                     if (res.data.success) {
-                        this.getMessages();
+                        this.allMessages.push(res.data.success);
                         this.content = "",
                             this.$refs.form.reset();
                     }
@@ -133,27 +110,48 @@
                         this.allMessages = res.data.messages;
                     }
                     if (res.data.list) {
+                        // filtre pour avoir la liste des utilisteur ayant contacté l'annonceur
                         let data = res.data.list.map(item => Object.values(item).filter(i => i.id != this.user
-                            .id)[0]);
-                        this.list = Array.from(new Set(data.map(a => a.id))).map(id => {
+                            .id)[0]);//on a maintenant dans la variable data la liste des contacts avec des contacts dupliqués
+                        this.list = Array.from(new Set(data.map(a => a.id))).map(id => {//pour enlever les contacts dupliqués
                             return data.find(a => a.id === id)
                         });
                     }
                 }).catch(err => {
                     console.log("error", err)
                 })
+            },
+            makeAsRead(){
+                axios.post(`/api/makeAsRead/${this.user.id}/${this.receiver}`,{},{
+                    headers: {
+                        "Authorization": `Bearer ${this.user.token || ""}`
+                    }
+                }).then(res=>{
+                    if(res.data.success){
+                        this.getNotifications();
+                    }
+                })
             }
         },
         watch: {
             annoucement() {
-                this.getMessages();
+                this.getMessages();//demander les messages une fois l'annonce est recupérée.
             }
         },
         mounted() {
             this.getSingle(this.$route.params.id);
             window.Echo.private('App.Models.User.' + this.user.id).notification((data) => {
                 console.log("notification data", data);
-                this.getMessages();
+                if(this.annoucement.user_id == this.user.id){ // si l'utilisateur authentifié est l'annonceur if faut updater la list des contact .
+                    let listOfId=this.list.map(i=>i.id);
+                    if(listOfId.includes(data.message.from.id)){ //ne mettre à jour la liste des contacts que s'il s'agit d'un contact qui n'exist pas encore.
+                        this.allMessages.push(data.message) 
+                    }
+                    else{
+                        this.getMessages(); //pour modifier la liste des contacts il faut demander à nouveau la liste des messages est executer les filtres javascript.
+                    }
+                }
+                this.allMessages.push(data.message) //si non il suffit d'ajouter le nouveau message au liste des messages.
             });
         }
     }

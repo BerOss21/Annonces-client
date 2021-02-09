@@ -7,6 +7,8 @@ export default createStore({
      filter:"",
      categories:"",
      cities:"",
+     notifications:"",
+     unreadNotifications:"",
      storage:(localStorage.getItem("user") || sessionStorage.getItem("user")) || ""
   },
   getters: {
@@ -32,6 +34,9 @@ export default createStore({
      updateStorage(state){
        state.storage=(localStorage.getItem("user") || sessionStorage.getItem("user")) || "";
      },
+     updateNotifications(state){
+      state.notifications="";
+    },
      clearAnnoucement(state){
        state.annoucement=""
      },
@@ -81,7 +86,19 @@ export default createStore({
               state.cities=res.data.cities
           }
         })
-      }
+      },
+      getNotifications({state,getters}){
+          axios.get(`/api/notifications/${getters.user.id}`, {
+              headers: {
+                  "Authorization": `Bearer ${getters.user.token || ""}`
+              }
+          }).then(res=>{
+              state.notifications=res.data.notifications;
+              state.unreadNotifications=res.data.unreadNotifications;
+          }).catch(err=>{
+              console.log("error",err);
+          })
+        }
   },
   modules: {
 
