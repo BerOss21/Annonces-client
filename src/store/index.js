@@ -27,7 +27,7 @@ export default createStore({
         return 0;
       }
       let annouce= JSON.parse(JSON.stringify(state.annoucements));//deep clone
-      return annouce?annouce.sort( compare ).slice(0,5):[]
+      return annouce?annouce.sort( compare ).slice(0,6):[]
     }
   },
   mutations: {

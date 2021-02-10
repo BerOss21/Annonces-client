@@ -1,8 +1,8 @@
 <template>
-    <section id="banner">
-        <header>
-            <h2>Howdy. This is Dopetrope.</h2>
-            <p>A responsive template by HTML5 UP</p>
+    <section id="banner" class="mt-0">
+        <header class="pt-0">
+            <h2>Bienvenue dans votre site d'annonces</h2>
+            <p>Trouver la bonne affaire </p>
         </header>
     </section>
 </template>

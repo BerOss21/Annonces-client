@@ -1,43 +1,27 @@
 <template>
     <!-- Logo -->
-    <h1><a href="">Annonces</a></h1>
+    <h1><a href="">Annonces.ma</a></h1>
     <!-- Nav -->
     <nav id="nav">
         <ul>
             <li><router-link to="/">Accueuil</router-link></li>
-            <li class="opener">
+            <!--<li class="opener link">
                 <router-link :to="{name:'Categories'}">Categories</router-link>
-                <ul>
-                    <li><router-link to="#">Lorem ipsum dolor</router-link></li>
-                    <li><router-link to="#">Magna phasellus</router-link></li>
-                    <li><router-link to="#">Etiam dolore nisl</router-link></li>
-                    <li>
-                        <router-link to="#">Phasellus consequat</router-link>
-                        <ul>
-                            <li><router-link to="#">Magna phasellus</router-link></li>
-                            <li><router-link to="#">Etiam dolore nisl</router-link></li>
-                            <li><router-link to="#">Veroeros feugiat</router-link></li>
-                            <li><router-link to="#">Nisl sed aliquam</router-link></li>
-                            <li><router-link to="#">Dolore adipiscing</router-link></li>
-                        </ul>
-                    </li>
-                    <li><router-link to="#">Veroeros feugiat</router-link></li>
-                </ul>
-            </li>
+            </li>-->
             <li><router-link :to="{name:'Search'}">Recherche</router-link></li>
          
             <li v-if="user"><router-link :to="{name:'Dashboard'}">Dashboard</router-link></li>
             <li v-if="user" style="position:relative;text-align:center">
                 <a href="" @click.prevent="DisplayLogout">
-                    <img :src="user.avatar.encoded" alt="avatar" class="rounded-circle mr-1" style="width:40px">
-                    <span>{{user.name}} <span class="badge bg-danger text-white"> {{unreadNotifications.length}} </span></span>
+                    <img :src="user.avatar.encoded" alt="avatar" class="rounded-circle mr-1" style="width:30px;height:30px">
+                    <span>{{user.name}} <i class="fab fa-facebook-messenger h4 ml-3" :class="unreadNotifications.length?'text-danger':''"></i><span class="badge bg-transparent" :class="unreadNotifications.length?'text-danger':'text-dark'" style="vertical-align:top"> {{unreadNotifications.length}} </span></span>
                 </a>
-                <div id="logout" ref="logout" class="mt-2 d-none" style="position:absolute;width:100%;z-index:100;">
+                <div ref="logout" class="mt-2 logout d-none" style="position:absolute;width:100%;z-index:100;">
                         <ul class="list-group text-left" style="font-size:12px;max-height:300px;overflow-y:scroll;">
-                            <li class="list-group-item list-group-item-action" :class="notification.read_at?'list-group-item-light':'list-group-item-warning'" v-for="(notification,index) in notifications" :key="index">
+                            <router-link :to="{name:'Chat',params:{id:notification.data.message.annoucement_id}}" class="list-group-item list-group-item-action text-dark" :class="notification.read_at?'list-group-item-light':'list-group-item-warning'" v-for="(notification,index) in notifications" :key="index">
                                 <h6><img :src="notification.data.message.from.avatar.encoded" alt="avatat" style="width:30px"> {{notification.data.message.from.name}} </h6>
                                 {{notification.data.message.content.slice(0,10)}}<a href="" @click.prevent="makeAsRead(notification.id)"><i v-if="!notification.read_at" class="fas fa-eye float-right"></i></a>
-                            </li>
+                            </router-link>
                         </ul>
                     <button class="btn btn-danger btn-block" @click="Logout">Se deconnecter <i class="fas fa-sign-out-alt"></i></button>
                 </div>
@@ -48,6 +32,49 @@
             </template>
         </ul>
     </nav>
+    <div class="panel">
+        <nav>
+            <ul class="p-0">
+                <router-link class="text-dark" to="/">
+                     <li class="list-group-item list-group-item-dark list-group-item-action">Accueuil</li>
+                </router-link>
+                 <!--<router-link class="text-dark" :to="{name:'Categories'}">
+                    <li class="list-group-item list-group-item-dark list-group-item-action">
+                    Categories
+                    </li>
+                </router-link>-->
+                <router-link class="text-dark" :to="{name:'Search'}">
+                    <li class="list-group-item list-group-item-dark list-group-item-action">Recherche</li>
+                </router-link>
+                <router-link class="text-dark" :to="{name:'Dashboard'}">
+                    <li v-if="user" class="list-group-item list-group-item-dark list-group-item-action">Dashboard</li>
+                </router-link>
+                <li v-if="user" class="list-group-item list-group-item-dark list-group-item-action" style="position:relative;">
+                    <a href="" @click.prevent="DisplayLogout" class="text-dark">
+                        <img :src="user.avatar.encoded" alt="avatar" class="rounded-circle mr-1" style="width:40px">
+                        <span>{{user.name}} <i class="fab fa-facebook-messenger h4 ml-3" :class="unreadNotifications.length?'text-danger':''"></i><span class="badge bg-transparent" :class="unreadNotifications.length?'text-danger':'text-dark'" style="vertical-align:top"> {{unreadNotifications.length}} </span></span>
+                    </a>
+                    <div ref="logout2" class="mt-2 logout d-none" style="position:absolute;left:0;width:100%;z-index:100;">
+                            <ul class="list-group text-left" style="font-size:12px;max-height:300px;overflow-y:scroll;">
+                                <router-link :to="{name:'Chat',params:{id:notification.data.message.annoucement_id}}" class="list-group-item list-group-item-action text-dark" :class="notification.read_at?'list-group-item-light':'list-group-item-warning'" v-for="(notification,index) in notifications" :key="index">
+                                    <h6><img :src="notification.data.message.from.avatar.encoded" alt="avatat" style="width:30px"> {{notification.data.message.from.name}} </h6>
+                                    {{notification.data.message.content.slice(0,10)}}<a href="" @click.prevent="makeAsRead(notification.id)"><i v-if="!notification.read_at" class="fas fa-eye float-right"></i></a>
+                                </router-link>
+                            </ul>
+                        <button class="btn btn-danger btn-block" @click="Logout">Se deconnecter <i class="fas fa-sign-out-alt"></i></button>
+                    </div>
+                </li>
+                <template v-else>
+                    <router-link class="text-dark" :to="{name:'Login'}">
+                        <li class="list-group-item list-group-item-dark list-group-item-action">S'identifier</li>
+                    </router-link>
+                    <router-link class="text-dark" :to="{name:'Register'}">
+                        <li class="list-group-item list-group-item-dark list-group-item-action">S'inscrire</li>
+                    </router-link>
+                </template>
+            </ul>
+        </nav>
+    </div>
 </template>
 
 <script>
@@ -65,6 +92,7 @@
             ...mapMutations(["updateNotifications","updateStorage"]),
             DisplayLogout(){
                this.$refs.logout.classList.toggle("d-none");
+               this.$refs.logout2.classList.toggle("d-none");
             },
             makeAsRead(id){
                 axios.post(`/api/makeNotificationAsRead/${id}`,{},{

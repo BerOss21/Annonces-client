@@ -1,6 +1,6 @@
 (function($) {
 
-	/**
+	/**click
 	 * Generate an indented list of links from a nav. Meant for use with panel().
 	 * @return {jQuery} jQuery object.
 	 */
@@ -141,7 +141,7 @@
 					.css('-webkit-overflow-scrolling', 'touch');
 
 			// Hide on click.
-				if (config.hideOnClick) {
+			/*	if (config.hideOnClick) {
 
 					$this.find('a')
 						.css('-webkit-tap-highlight-color', 'rgba(0,0,0,0)');
@@ -175,7 +175,7 @@
 
 						});
 
-				}
+				}*/
 
 			// Event: Touch stuff.
 				$this.on('touchstart', function(event) {
@@ -255,21 +255,21 @@
 				});
 
 			// Event: Hide panel if a child anchor tag pointing to its ID is clicked.
-				$this.on('click', 'a[href="#' + id + '"]', function(event) {
+				/*$this.on('click', 'a[href="#' + id + '"]', function(event) {
 
 					event.preventDefault();
 					event.stopPropagation();
 
 					config.target.removeClass(config.visibleClass);
 
-				});
+				});*/
 
 		// Body.
 
 			// Event: Hide panel on body click/tap.
-				$body.on('click touchend', function(event) {
+				/*$body.on('click touchend', function(event) {
 					$this._hide(event);
-				});
+				});*/
 
 			// Event: Toggle.
 				$body.on('click', 'a[href="#' + id + '"]', function(event) {

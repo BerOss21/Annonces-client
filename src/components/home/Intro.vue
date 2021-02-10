@@ -1,53 +1,13 @@
 <template>
     <section id="intro" class="container">
         <div class="row">
-            <div class="col-2 col-12-medium">
-                <section class="first">
-                    <i class="icon solid featured fa-cog"></i>
+            <div v-for="(category,index) in categories" class="col-md-3" :key="index">
+                <section class="first p-0 mb-0">
+                    <router-link :to="{name:'Categories',params:{id:category.id,name:category.name}}">
+                        <i class="icon solid featured alt2 fa-folder-open"></i>
+                    </router-link>
                     <header>
-                        <h2>Ipsum consequat</h2>
-                    </header>
-                </section>
-            </div>
-            <div class="col-2 col-12-medium">
-                <section class="middle">
-                    <i class="icon solid featured alt fa-bolt"></i>
-                    <header>
-                        <h2>Magna etiam dolor</h2>
-                    </header>
-                </section>
-            </div>
-            <div class="col-2 col-12-medium">
-                <section class="last">
-                    <i class="icon solid featured alt2 fa-star"></i>
-                    <header>
-                        <h2>Tempus adipiscing</h2>
-                    </header>
-                </section>
-            </div>
-            <div class="col-2 col-12-medium">
-                <section class="first">
-                    <i class="icon solid featured fa-cog"></i>
-                    <header>
-                        <h2>Ipsum consequat</h2>
-                    </header>
-    
-                </section>
-            </div>
-            <div class="col-2 col-12-medium">
-                <section class="middle">
-                    <i class="icon solid featured alt fa-bolt"></i>
-                    <header>
-                        <h2>Magna etiam dolor</h2>
-                    </header>
-                   
-                </section>
-            </div>
-            <div class="col-2 col-12-medium">
-                <section class="last">
-                    <i class="icon solid featured alt2 fa-star"></i>
-                    <header>
-                        <h2>Tempus adipiscing</h2>
+                        <h5>{{category.name}}</h5>
                     </header>
                 </section>
             </div>
@@ -55,7 +15,13 @@
     </section>
 </template>
 <script>
+import {mapState,mapActions} from "vuex";
 export default {
-    name:"intro"
+    name:"intro",
+    computed:mapState(["categories"]),
+    methods:mapActions(["getCategories"]),
+    beforeMount(){
+        this.getCategories();
+    }
 }
 </script>

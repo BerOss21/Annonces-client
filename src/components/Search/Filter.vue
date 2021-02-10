@@ -49,9 +49,7 @@ export default {
             getCities:"getCities",
             getCategories:"getCategories"
         }),
-        /*...mapMutations({
-            filter:"filter"
-        }),*/
+     
        filter(){
             this.$store.commit("filter",{
                 "q":this.q,

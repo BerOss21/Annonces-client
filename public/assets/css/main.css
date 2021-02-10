@@ -2,8 +2,8 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic");
 
 /*
-	Dopetrope by HTML5 UP
-	html5up.net | @ajlkn intro -webkit-appearance: none;
+	Dopetrope by HTML5 UP banner
+	html5up.net | @ajlkn navPanel;
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
@@ -2173,9 +2173,9 @@ input::-moz-focus-inner {
 /* Banner */
 
 	#banner {
-		background: #CCE8F4 url("../../images/pic01.jpg");
+		background: #CCE8F4 url("../../images/store.png");
 		background-position: center center;
-		background-size: auto 100%;
+		background-size: cover;
 		background-repeat: no-repeat;
 		text-align: center;
 		position: relative;
@@ -2184,7 +2184,7 @@ input::-moz-focus-inner {
 	}
 
 		#banner header {
-			background-color: rgba(34, 30, 31, 0.98);
+			background-color: rgba(34, 30, 31, 0.4);
 			display: inline-block;
 			padding: 2.5em 5em;
 			border-radius: 5px;
