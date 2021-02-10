@@ -5,7 +5,7 @@
             <div class="card-header">
                 <h3>Dernières annonces</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body" v-if="annoucements[0]">
                 <div class="card mb-3 border border-primary" style="width:100%" v-for="(annoucement,index) in annoucements" :key="index">
                     <div class="row g-0">
                         <div class="col-md-4">
@@ -26,6 +26,10 @@
                     </div>
                 </div>
             </div>
+            <div v-else class="d-flex justify-content-center">
+                <div class="spinner-border text-danger m-5" role="status">
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -38,9 +42,12 @@
                 annoucements:"filter"
             })
         },
-        methods:mapActions({
-            getAnnoucements:"getAnnoucements"
-        }),
+        methods:{
+            ...mapActions({
+                getAnnoucements:"getAnnoucements"
+            }),
+        },
+          
         mounted(){
             this.getAnnoucements();
         }

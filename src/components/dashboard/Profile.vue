@@ -19,7 +19,7 @@
                         <li class="list-group-item"><strong>Email:</strong> {{user.email}}</li>
                         <li class="list-group-item">
                             <strong>Avatar: </strong>
-                            <img :src="user.avatar.encoded" alt="avatar" style="width:20%">
+                            <img :src="user.avatar.encoded" alt="avatar" class="rounded" style="width:50px;height:50px">
                         </li>
                     </ul>
                 </div>

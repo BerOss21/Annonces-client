@@ -7,7 +7,7 @@
                         <header class="major">
                             <h2>Les plus populaires</h2>
                         </header>
-                        <div class="row">
+                        <div class="row" v-if="popular[0]">
                             <div class="col-4 col-6-medium col-12-small" v-for="(item,index) in popular" :key="index">
                                 <section class="box" style="position:relative">
                                     <span class="badge badge-primary" style="position:absolute;top:5px;right:5px;z-index:100">{{item.views}} vues</span>
@@ -24,6 +24,10 @@
                                         </ul>
                                     </footer>
                                 </section>
+                            </div>
+                        </div>
+                        <div v-else class="d-flex justify-content-center">
+                            <div class="spinner-border text-danger m-5" role="status">
                             </div>
                         </div>
                     </section>

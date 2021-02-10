@@ -22,13 +22,23 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody v-if="cities[0]">
                         <tr v-for="(city,index) in cities" :key="index">
                             <td>{{city.name}}</td>
                             <td>
                                 <div class="d-flex">
                                     <router-link :to="{name:'EditCity',params:{id:city.id}}" class="btn btn-primary btn-sm mr-1">modifier</router-link>
                                     <a href="/" class="btn btn-danger btn-sm mr-1" @click.prevent="deleteCity(city.id)">supprimer</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody v-else >
+                        <tr>
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border text-danger m-5" role="status">
+                                    </div>
                                 </div>
                             </td>
                         </tr>

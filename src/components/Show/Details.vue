@@ -8,7 +8,7 @@
                 <li class="breadcrumb-item active" aria-current="page">Details</li>
             </ol>
         </nav>
-        <div class="card mb-3">
+        <div class="card mb-3" v-if="annoucement">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -32,6 +32,10 @@
                 <h5 class="card-title">{{annoucement.title || ""}}</h5>
                 <p class="card-text">{{annoucement.description || ""}}</p>
                 <p class="card-text"><small class="text-muted">{{annoucement.created_at || ""}}</small></p>
+            </div>
+        </div>
+        <div v-else class="d-flex justify-content-center">
+            <div class="spinner-border text-danger m-5" role="status">
             </div>
         </div>
     </div>
