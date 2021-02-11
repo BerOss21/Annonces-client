@@ -1,5 +1,5 @@
 <template>
-        <section id="header" class="p-0">
+        <section id="header" class="p-0 mb-0">
             <!-- Banner -->
 			<Banner/>
             <!-- Intro -->

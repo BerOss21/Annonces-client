@@ -7,7 +7,7 @@
             </div>
             <div class="card-body" v-if="popular[0]">
                 <section class="box" v-for="(item,index) in popular" :key="index">
-                    <a href="#" class="image featured"><img :src="item.image.encoded" :alt="item.title" /></a>
+                    <router-link :to="{name:'Show',params:{id:item.id,title:item.title}}" class="image featured"><img :src="item.image.encoded" :alt="item.title" /></router-link>
                     <header>
                         <h3>{{item.title}}</h3>
                     </header>
@@ -15,7 +15,7 @@
 
                     <span class="badge bg-info text-dark p-1">{{item.views}} vues</span>
                     <footer>
-                        <a href="#" class="button alt">Voir plus</a>
+                        <router-link :to="{name:'Show',params:{id:item.id,title:item.title}}"  class="button alt">Voir plus</router-link>
                     </footer>
                 </section>
             </div>

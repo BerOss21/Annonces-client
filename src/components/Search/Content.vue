@@ -9,13 +9,13 @@
                 <div class="card mb-3 border border-primary" style="width:100%" v-for="(annoucement,index) in annoucements" :key="index">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <router-link :to="{name:'Show',params:{id:annoucement.id}}">
+                            <router-link :to="{name:'Show',params:{id:annoucement.id,title:annoucement.title}}">
                                  <img :src="annoucement.image.encoded"  alt="" style="width:100%;height:100%">
                             </router-link>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <router-link :to="{name:'Show',params:{id:annoucement.id}}">
+                                <router-link :to="{name:'Show',params:{id:annoucement.id,title:annoucement.title}}">
                                     <h5 class="card-title">{{annoucement.title}}</h5>
                                 </router-link>
                                 <p class="card-text text-danger h5">{{annoucement.price}} DH</p>

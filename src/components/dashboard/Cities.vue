@@ -22,7 +22,7 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody v-if="cities[0]">
+                    <tbody v-if="success">
                         <tr v-for="(city,index) in cities" :key="index">
                             <td>{{city.name}}</td>
                             <td>
@@ -58,6 +58,11 @@
 
     export default {
         name: "CitiesList",
+        data(){
+            return{
+                success:false
+            }
+        },
         computed:
         {
             ...mapState({
@@ -88,7 +93,9 @@
             })
         },
         mounted(){
-            this.getCities();
+            this.getCities().then(()=>{
+                this.success=true;
+            });
         },
        
 

@@ -65,7 +65,6 @@ export default createStore({
           })
       },
       getSingle({state},id){
-         console.log("id store")
           axios.get(`/api/annoucements/${id}`).then(res=>{
             console.log("res",res.data)
             state.annoucement=res.data.annoucement

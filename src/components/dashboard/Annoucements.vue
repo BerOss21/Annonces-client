@@ -30,7 +30,7 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody v-if="annoucements[0]">
+                    <tbody v-if="success">
                         <tr v-for="(annoucement,index) in annoucements" :key="index">
                             <td><img :src="annoucement.image.encoded" :alt="annoucement.title" style="width:100px"></td>
                             <td>{{annoucement.title}}</td>
@@ -81,7 +81,8 @@
         name: "Annoucements",
         data(){
             return{
-                annoucements:""
+                annoucements:"",
+                success:false
             }
         },
         computed:{
@@ -125,6 +126,7 @@
                if(res.data.annoucements){
                     this.annoucements=res.data.annoucements
                 }
+                this.success=true;
              }).catch(err=>{
                 console.log("error",err)
             })

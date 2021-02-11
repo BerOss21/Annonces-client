@@ -39,12 +39,12 @@ const routes = [
     component: Search
   },
   {
-    path: "/single-annoucements/:id",
+    path: "/single-annoucements/:id/:title",
     name: "Show",
     component: Show
   },
   {
-    path: "/conversation/:id",
+    path: "/conversation/:id/:title",
     name: "Chat",
     component: Chat,
     beforeEnter: (to, from, next) => {

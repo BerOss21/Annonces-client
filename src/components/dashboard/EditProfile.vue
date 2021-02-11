@@ -24,6 +24,10 @@
                         <label for="name">Email</label>
                         <input type="email" id="name"  v-model="email">
                     </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile</label>
+                        <input type="numbre" id="mobile"  v-model="mobile">
+                    </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Avatar</label>
                         <input class="form-control" type="file" @change="onImageChange" id="formFile">
@@ -47,6 +51,7 @@
             return {
                 name:"",
                 email:"",
+                mobile:"",
                 avatar: "",
             }
         },
@@ -85,12 +90,14 @@
                 axios.patch(`/api/user/update/${this.user.id}`, {
                     name: this.name,
                     email:this.email,
+                    mobile:this.mobile,
                     avatar: this.avatar,
                 },{ headers: { "Authorization": `Bearer ${this.user.token || ""}` } }).then(res => {
                     if (res.data.success) {
                         let NewUser=this.user;
                         NewUser.name=res.data.success.name;
                         NewUser.email=res.data.success.email;
+                        NewUser.mobile=res.data.success.mobile;
                         NewUser.avatar=res.data.success.avatar;
                         if(localStorage.user){
                             localStorage.setItem("user",JSON.stringify(NewUser));
@@ -119,6 +126,7 @@
         mounted() {
            this.name=this.user.name,
            this.email=this.user.email,
+           this.mobile=this.user.mobile,
            this.avatar=this.user.avatar.encoded
            
         }

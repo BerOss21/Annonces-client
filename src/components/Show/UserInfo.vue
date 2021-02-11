@@ -8,8 +8,8 @@
                     {{annoucement.user?annoucement.user.name:''}}
                 </h5>
                 <p class="card-text">{{annoucement.user?annoucement.user.email:''}}</p>
-                <p class="card-text">Mobile : </p>
-                <router-link :to="{name:'Chat'}" class="btn btn-primary btn-block">Chat</router-link>
+                <p class="card-text">Mobile :{{annoucement.user.mobile || "Non disponible"}} </p>
+                <router-link :to="{name:'Chat',params:{id:annoucement.id,title:annoucement.title}}" class="btn btn-primary btn-block">Chat</router-link>
             </div>
             <div v-else class="d-flex justify-content-center">
                 <div class="spinner-border text-danger m-5" role="status">
@@ -35,11 +35,5 @@
                 clearAnnoucement:"clearAnnoucement"
             })
         },
-        mounted(){
-            this.getSingle(this.$route.params.id);
-        },
-        beforeMount(){
-            this.clearAnnoucement();
-        }
     }
 </script>

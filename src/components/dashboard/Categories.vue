@@ -23,7 +23,7 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody v-if="categories[0]">
+                    <tbody v-if="success">
                         <tr v-for="(category,index) in categories" :key="index">
                             <td>
                                 <img v-if="category.image" :src="category.image.encoded" :alt="category.name" style="width:100px">
@@ -62,6 +62,11 @@
     } from 'vuex';
     export default {
         name: "CategoriesList",
+        data(){
+            return{
+                success:false
+            }
+        },
         computed:
         {
             ...mapState({
@@ -92,7 +97,9 @@
             })
         },
         mounted(){
-            this.getCategories();
+            this.getCategories().then(()=>{
+                this.success=true;
+            });
         },
        
 

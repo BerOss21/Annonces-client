@@ -5,6 +5,9 @@
                 <li class="breadcrumb-item">
                     <router-link :to="{name:'Search'}">Annonces</router-link>
                 </li>
+                <li class="breadcrumb-item">
+                    <router-link :to="{name:'Show',params:{id:$route.params.id,title:$route.params.title}}">{{$route.params.title}}</router-link>
+                </li>
                 <li class="breadcrumb-item active" aria-current="page">Conversation</li>
             </ol>
         </nav>
@@ -13,7 +16,7 @@
                 <div class="card-header">
                     <h3>Conversation</h3>
                 </div>
-                <div class="card-body" style="height:600px;overflow-y:scroll">
+                <div class="card-body" style="height:400px;overflow-y:scroll">
                     <div class="container col-10">
                         <div class="col-5 mb-3"
                             :class="message.from.id==user.id?'ml-auto alert alert-success':'alert alert-secondary'"
@@ -36,13 +39,18 @@
                     </form>
                 </div>
                 <div class="card-footer text-muted" v-if="annoucement.user_id && annoucement.user_id==user.id">
-                   <div class="row">
+                   <div class="row" v-if="list[0]">
                         <div v-for="(item,index) in list" :key="index" class="col-2 text-center">
                             <a href="" @click.prevent="selectUser(item.id)" style="position:relative;color:white">
                                  <img :src="item.avatar.encoded" alt="avatar" class="rounded-circle" :class="unreadNotifications.some(i=>i.data.message.from.id==item.id)?'unread':''"  style="width:100%">
                                  <span v-if="unreadNotifications.some(i=>i.data.message.from.id==item.id)" class="badge bg-danger" style="position:absolute;top:-8px">{{unreadNotifications.filter(i=>i.data.message.from.id==item.id).length}}</span>
                             </a>
                             <small>{{item.name}}</small>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div class="alert alert-warning text-center mx-auto">
+                            Aucune conversation disponible
                         </div>
                     </div>
                 </div>

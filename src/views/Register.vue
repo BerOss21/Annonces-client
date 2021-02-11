@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-5 col-md-6">
+    <div class="container mt-5 col-md-6 pb-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -16,6 +16,11 @@
                             <div class="form-group">
                                 <input id="email" type="email" v-model="email" class="form-control" name="email"
                                     autocomplete="email" placeholder="Email">
+                            </div>
+
+                            <div class="form-group">
+                                <input id="mobile" type="number" v-model="mobile" class="form-control" name="mobile"
+                                    autocomplete="mobile" placeholder="Mobile">
                             </div>
 
                             <div class="form-group">
@@ -52,6 +57,7 @@
                 name: "",
                 email: "",
                 password: "",
+                mobile:"",
                 password_confirmation: "",
                 avatar:""
             }
@@ -86,6 +92,7 @@
                 axios.post("/api/user/register", {
                     name: this.name,
                     email: this.email,
+                    mobile: this.mobile,
                     password: this.password,
                     confirm: this.password_confirmation,
                     avatar:this.avatar
