@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
 import "bootstrap/js/dist/carousel";
 
+
 import Echo from "laravel-echo"
 
 window.Pusher = require('pusher-js');
@@ -30,8 +31,6 @@ window.Echo = new Echo({
       },
   },
 });
-
-
 
 
 

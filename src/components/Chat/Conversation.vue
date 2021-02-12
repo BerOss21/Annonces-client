@@ -16,7 +16,7 @@
                 <div class="card-header">
                     <h3>Conversation</h3>
                 </div>
-                <div class="card-body" style="height:400px;overflow-y:scroll">
+                <div class="card-body" ref="content" style="height:400px;overflow-y:scroll">
                     <div class="container col-10">
                         <div class="col-5 mb-3"
                             :class="message.from.id==user.id?'ml-auto alert alert-success':'alert alert-secondary'"
@@ -105,7 +105,7 @@
                     if (res.data.success) {
                         this.allMessages.push(res.data.success);
                         this.content = "",
-                            this.$refs.form.reset();
+                        this.$refs.form.reset();
                     }
                 }).catch(err => {
                     console.log("error", err)
@@ -132,6 +132,7 @@
                             return data.find(a => a.id === id)
                         });
                     }
+                    this.$refs.content.scrollTop = 0;
                 }).catch(err => {
                     console.log("error", err)
                 })
@@ -168,6 +169,7 @@
                     }
                 }
                 this.allMessages.push(data.message) //si non il suffit d'ajouter le nouveau message au liste des messages.
+                 this.$refs.content.scrollTop = 0;
             });
         }
     }

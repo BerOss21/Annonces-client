@@ -36,6 +36,7 @@ export default createStore({
      },
      updateNotifications(state){
       state.notifications="";
+      state.unreadNotifications="";
     },
      clearAnnoucement(state){
        state.annoucement=""

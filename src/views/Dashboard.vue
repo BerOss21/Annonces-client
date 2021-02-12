@@ -1,10 +1,10 @@
 <template>
-    <section id="main">
+    <section id="main mb-0">
         <div class="container">
             <div class="row">  
                 <!-- Sidebar -->       
-                <Sidebar/>
-                <!-- Content -->
+                <Sidebar class="mt-5"/>
+                <!-- Content -->            
                 <router-view />             
             </div>
         </div>
