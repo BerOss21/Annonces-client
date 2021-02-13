@@ -5,8 +5,8 @@
             <div class="card-header">
                 <h3>Dernières annonces</h3>
             </div>
-            <div class="card-body" v-if="success">
-                <template v-if="annoucements[0]">
+            <div class="card-body" v-if="paginate[0]">
+                <template v-if="paginate[0]">
                     <div class="card mb-3 border border-primary" style="width:100%" v-for="(annoucement,index) in paginate" :key="index">
                         <div class="row g-0">
                             <div class="col-md-4">
@@ -84,6 +84,7 @@
         },
           
         mounted(){
+            window.scrollTo(0,0);
             this.getAnnoucements().then(()=>{
                 this.success=true;
             });

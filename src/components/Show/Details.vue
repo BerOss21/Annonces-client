@@ -31,6 +31,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{annoucement.title || ""}}</h5>
                 <p class="card-text">{{annoucement.description || ""}}</p>
+                <i><strong>Villes: </strong>{{annoucement.cities.map(i=>i.name).join(" ")}}</i>
                 <p class="card-text"><small class="text-muted">{{annoucement.created_at || ""}}</small></p>
             </div>
         </div>
@@ -64,6 +65,7 @@
             this.clearAnnoucement();
         },
         mounted(){
+            window.scrollTo(0,0);
             this.getSingle(this.$route.params.id);
         }
     }

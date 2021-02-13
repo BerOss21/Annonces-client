@@ -15,7 +15,7 @@
             </li>
 
             <li v-if="user">
-                <router-link :to="{name:'Dashboard'}">Dashboard</router-link>
+                <router-link :to="{name:'Annoucements'}">Dashboard</router-link>
             </li>
             <li v-if="user" style="position:relative;text-align:center">
                 <a href="" @click.prevent="DisplayLogout">
@@ -79,7 +79,7 @@
                 <router-link class="text-dark" :to="{name:'Search'}">
                     <li class="list-group-item list-group-item-dark list-group-item-action">Recherche</li>
                 </router-link>
-                <router-link class="text-dark" :to="{name:'Dashboard'}">
+                <router-link class="text-dark" :to="{name:'Annoucements'}">
                     <li v-if="user" class="list-group-item list-group-item-dark list-group-item-action">Dashboard</li>
                 </router-link>
                 <li v-if="user" class="list-group-item list-group-item-dark list-group-item-action"
